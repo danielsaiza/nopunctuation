@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - daniel saiza</title>
+    <!-- Tailwind CSS para estructura responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* ==========================================================================
+           CONFIGURACIÓN DE TIPOGRAFÍAS PERSONALIZADAS (@font-face)
+           Coloca 'cityburn.ttf' y 'bohemian-typewriter.ttf' en la misma carpeta
+           que este archivo 'index.html' en tu repositorio de GitHub Pages.
+           ========================================================================== */
+        
+        @font-face {
+            font-family: "CityBurn";
+            src: url("./cityburn.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: "Bohemian Typewriter";
+            src: url("./bohemian-typewriter.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+            /* ==========================================================================
+           ESTILOS GENERALES Y ESTÉTICA MINIMALISTA
+           ========================================================================== */
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Bohemian Typewriter", "Courier New", Courier, serif;
+            background-color: #fff7ea;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        /* Título principal 'Sign Up' con CityBurn en color negro */
+        .title-cityburn {
+            font-family: "CityBurn", sans-serif;
+            color: #000000;
+            font-weight: normal;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Todo el resto de textos, inputs y botones con Bohemian Typewriter */
+        input, button, label, p, a, span {
+            font-family: "Bohemian Typewriter", "Courier New", Courier, serif;
+        }
+
+        /* ==========================================================================
+           INPUTS SIN CAJA PESADA (SOLO LÍNEA INFERIOR LIMPIA)
+           ========================================================================== */
+
+        .input-minimal {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid #000000;
+            border-radius: 0;
+            color: #000000;
+            padding: 8px 2px;
+            transition: border-color 0.2s ease;
+        }
+
+        .input-minimal::placeholder {
+            color: #99927f;
+        }
+
+        .input-minimal:focus {
+            outline: none;
+            border-bottom: 1.5px solid #000000;
+        }
+
+        .input-minimal.input-error {
+            border-bottom-color: #b91c1c;
+        }
+
+        /* ==========================================================================
+           BOTÓN DE ENVÍO: NEGRO/BLANCO EN REPOSO -> BLANCO/NEGRO AL PRESIONAR
+           ========================================================================== */
+        
+        .btn-submit {
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            transition: background-color 0.08s ease, color 0.08s ease;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Al hacer presión (:active o clase táctil) -> Fondo blanco y texto negro */
+        .btn-submit:active,
+        .btn-submit.is-pressed {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        /* ==========================================================================
+           FOOTER INFERIOR (EXACTO AL DISEÑO DE REFERENCIA)
+           ========================================================================== */
+
+        .footer {
+            position: fixed;
+            bottom: 25px;
+            left: 30px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            z-index: 10;
+        }
+
+        .footer button {
+            background: none;
+            border: none;
+            padding: 0;
+            color: #000000;
+            font-family: "Bohemian Typewriter", serif;
+            font-size: 15px;
+            font-weight: normal;
+            cursor: default;
+            text-transform: uppercase;
+            opacity: 1;
+            transition: color 0.3s ease;
+        }
+
+        .footer button:hover {
+            color: #99927f;
+        }
+
+        .footer button:disabled {
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                left: 18px;
+                right: 18px;
+                bottom: 18px;
+                gap: 12px;
+            }
+
+            .footer button {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-center items-center px-6 pt-10 pb-28">
+
+    <!-- Contenedor Libre y Sin Borde -->
+    <main class="w-full max-w-sm">
+        
+        <!-- Título en CityBurn -->
+        <header class="text-center mb-9">
+            <h1 class="title-cityburn text-4xl sm:text-5xl select-none">
+                Sign Up
+            </h1>
+        </header>
+
+        <!-- Mensaje de Confirmación / Estado (oculto por defecto) -->
+        <div id="statusMessage" class="hidden mb-6 py-2 text-center text-xs sm:text-sm" role="alert">
+            <p id="statusText"></p>
+        </div>
+
+        <!-- Formulario Minimalista -->
+        <form id="signupForm" class="space-y-6" novalidate>
+            
+            <!-- Campo: Nombre de usuario -->
+            <div>
+                <label for="username" class="block text-xs uppercase tracking-wider mb-1">
+                    Username
+                </label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    placeholder="user_01" 
+                    required
+                    autocomplete="username"
+                    class="input-minimal w-full text-sm"
+                >
+                <p id="usernameError" class="hidden text-xs text-red-700 mt-1"></p>
+            </div>
+
+            <!-- Campo: Correo electrónico -->
+            <div>
+                <label for="email" class="block text-xs uppercase tracking-wider mb-1">
+                    Email
+                </label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="email@example.com" 
+                    required
+                    autocomplete="email"
+                    class="input-minimal w-full text-sm"
+                >
+                <p id="emailError" class="hidden text-xs text-red-700 mt-1"></p>
+            </div>
+
+            <!-- Campo: Contraseña -->
+            <div>
+                <label for="password" class="block text-xs uppercase tracking-wider mb-1">
+                    Password
+                </label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="••••••••" 
+                    required
+                    autocomplete="new-password"
+                    class="input-minimal w-full text-sm"
+                >
+                <p id="passwordError" class="hidden text-xs text-red-700 mt-1"></p>
+            </div>
+
+            <!-- Campo: Confirmar contraseña -->
+            <div>
+                <label for="confirmPassword" class="block text-xs uppercase tracking-wider mb-1">
+                    Confirm Password
+                </label>
+                <input 
+                    type="password" 
+                    id="confirmPassword" 
+                    name="confirmPassword" 
+                    placeholder="••••••••" 
+                    required
+                    autocomplete="new-password"
+                    class="input-minimal w-full text-sm"
+                >
+                <p id="confirmPasswordError" class="hidden text-xs text-red-700 mt-1"></p>
+            </div>
+
+            <!-- Botón de Envío -->
+            <div class="pt-3">
+                <button 
+                    type="submit" 
+                    id="submitBtn"
+                    class="btn-submit w-full py-3 px-4 text-sm"
+                >
+                    Sign Up
+                </button>
+            </div>
+
+        </form>
+
+    </main>
+
+    <!-- FOOTER INFERIOR -->
+    <footer class="footer">
+
+        <button disabled>© CAPRYL</button>
+
+        <button disabled>PRIVACY POLICY</button>
+
+        <button disabled>TERMS &amp; CONDITIONS</button>
+
+        <button disabled>DO NOT SELL MY PERSONAL INFORMATION</button>
+
+        <button disabled>COOKIE CHOICES</button>
+
+    </footer>
+
+    <!-- Lógica de Validación e Interacción -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('signupForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const statusMessage = document.getElementById('statusMessage');
+            const statusText = document.getElementById('statusText');
+
+            const fields = {
+                username: {
+                    input: document.getElementById('username'),
+                    error: document.getElementById('usernameError')
+                },
+                email: {
+                    input: document.getElementById('email'),
+                    error: document.getElementById('emailError')
+                },
+                password: {
+                    input: document.getElementById('password'),
+                    error: document.getElementById('passwordError')
+                },
+                confirmPassword: {
+                    input: document.getElementById('confirmPassword'),
+                    error: document.getElementById('confirmPasswordError')
+                }
+            };
+
+            // Efecto visual al presionar el botón también en dispositivos táctiles
+            submitBtn.addEventListener('touchstart', () => {
+                submitBtn.classList.add('is-pressed');
+            }, { passive: true });
+
+            ['touchend', 'touchcancel'].forEach(evt => {
+                submitBtn.addEventListener(evt, () => {
+                    submitBtn.classList.remove('is-pressed');
+                });
+            });
+
+            function setFieldError(fieldKey, message) {
+                const { input, error } = fields[fieldKey];
+                input.classList.add('input-error');
+                error.textContent = message;
+                error.classList.remove('hidden');
+            }
+
+            function clearFieldError(fieldKey) {
+                const { input, error } = fields[fieldKey];
+                input.classList.remove('input-error');
+                error.textContent = '';
+                error.classList.add('hidden');
+            }
+
+            Object.keys(fields).forEach(key => {
+                fields[key].input.addEventListener('input', () => {
+                    clearFieldError(key);
+                    statusMessage.classList.add('hidden');
+                });
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let isValid = true;
+
+                Object.keys(fields).forEach(clearFieldError);
+                statusMessage.classList.add('hidden');
+
+                const usernameVal = fields.username.input.value.trim();
+                const emailVal = fields.email.input.value.trim();
+                const passwordVal = fields.password.input.value;
+                const confirmPasswordVal = fields.confirmPassword.input.value;
+
+                if (usernameVal.length < 3) {
+                    setFieldError('username', 'Minimum 3 characters required.');
+                    isValid = false;
+                }
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailVal)) {
+                    setFieldError('email', 'Enter a valid email address.');
+                    isValid = false;
+                }
+
+                if (passwordVal.length < 8) {
+                    setFieldError('password', 'Minimum 8 characters required.');
+                    isValid = false;
+                }
+
+                if (confirmPasswordVal !== passwordVal || confirmPasswordVal === '') {
+                    setFieldError('confirmPassword', 'Passwords do not match.');
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    statusMessage.classList.remove('hidden');
+                    statusText.textContent = `ACCOUNT CREATED FOR ${usernameVal.toUpperCase()}.`;
+                    form.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
