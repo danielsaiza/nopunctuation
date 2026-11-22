@@ -9,7 +9,9 @@
 <style>
 @font-face {
     font-family: "CityBurn";
-    src: url("cityburn.ttf") format("truetype");
+    src: url("./cityburn.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
@@ -80,6 +82,7 @@ body {
 .title {
     font-size: 42px;
     letter-spacing: 3px;
+    text-transform: uppercase;
 }
 
 .password-input {
@@ -94,6 +97,7 @@ body {
     width: 220px;
     padding: 12px;
     letter-spacing: 4px;
+    text-transform: uppercase;
 }
 
 .password-input::placeholder {
@@ -109,6 +113,7 @@ body {
     font-family: "CityBurn", sans-serif;
     cursor: pointer;
     transition: 0.3s;
+    text-transform: uppercase;
 }
 
 .enter-button:hover {
@@ -119,6 +124,7 @@ body {
 #error {
     font-size: 12px;
     display: none;
+    text-transform: uppercase;
 }
 
 /* SUCCESS */
@@ -131,6 +137,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 30px;
+    text-transform: uppercase;
 }
 
 </style>
@@ -138,14 +145,16 @@ body {
 
 <body>
 
-<!-- Loading -->
+<!-- LOADING -->
+
 <div id="loader">
     <div class="spinner"></div>
 </div>
 
-<!-- Password -->
+<!-- PASSWORD -->
+
 <div id="password-screen">
-    <div class="title">Password</div>
+    <div class="title">PASSWORD</div>
 
     <input
         type="password"
@@ -157,17 +166,18 @@ body {
 
     <button class="enter-button" onclick="checkPassword()">ENTER</button>
 
-    <div id="error">Incorrect password</div>
+    <div id="error">INCORRECT PASSWORD</div>
 </div>
 
-<!-- Success -->
+<!-- SUCCESS -->
+
 <div id="success">
     ACCESS GRANTED
 </div>
 
 <script>
 
-// 4 second loading screen
+// 4 SECOND LOADING SCREEN
 
 setTimeout(() => {
     const loader = document.getElementById("loader");
@@ -183,7 +193,7 @@ setTimeout(() => {
 
 }, 4000);
 
-// Password check
+// PASSWORD CHECK
 
 function checkPassword() {
     const input = document.getElementById("password").value;
@@ -197,7 +207,7 @@ function checkPassword() {
     }
 }
 
-// Enter key
+// ENTER KEY
 
 document.getElementById("password").addEventListener("keydown", function(e) {
     if (e.key === "Enter") {
@@ -209,4 +219,3 @@ document.getElementById("password").addEventListener("keydown", function(e) {
 
 </body>
 </html>
-
