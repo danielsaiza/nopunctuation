@@ -8,7 +8,7 @@
 
 <style>
 @font-face {
-    font-family: "cityburn";
+    font-family: "CityBurn";
     src: url("./cityburn.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
@@ -127,19 +127,6 @@ body {
     text-transform: uppercase;
 }
 
-/* SUCCESS */
-
-#success {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    text-transform: uppercase;
-}
-
 </style>
 </head>
 
@@ -169,12 +156,6 @@ body {
     <div id="error">INCORRECT PASSWORD</div>
 </div>
 
-<!-- SUCCESS -->
-
-<div id="success">
-    ACCESS GRANTED
-</div>
-
 <script>
 
 // 4 SECOND LOADING SCREEN
@@ -193,15 +174,14 @@ setTimeout(() => {
 
 }, 4000);
 
-// PASSWORD CHECK
+// PASSWORD CHECK AND REDIRECT
 
 function checkPassword() {
     const input = document.getElementById("password").value;
     const error = document.getElementById("error");
 
     if (input === "DS4") {
-        document.getElementById("password-screen").style.display = "none";
-        document.getElementById("success").style.display = "flex";
+        window.location.href = "home.html";
     } else {
         error.style.display = "block";
     }
