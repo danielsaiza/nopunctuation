@@ -18,8 +18,8 @@
 }
 
 @font-face {
-    font-family: "Duality";
-    src: url("./duality.otf") format("opentype");
+    font-family: "Bohemian Typewriter";
+    src: url("./bohemian-typewriter.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -76,16 +76,21 @@ h1 {
     border: none;
     padding: 0;
     color: #000;
-    font-family: "Duality", sans-serif;
-    font-size: 13px;
+    font-family: "Bohemian Typewriter", serif;
+    font-size: 15px;
     font-weight: normal;
     cursor: default;
-    text-transform: none;
-    opacity: 0.85;
+    text-transform: uppercase;
+    opacity: 1;
+    transition: color 0.3s ease;
+}
+
+.footer button:hover {
+    color: #99927f;
 }
 
 .footer button:disabled {
-    opacity: 0.85;
+    opacity: 1;
 }
 
 /* MOBILE */
@@ -99,7 +104,7 @@ h1 {
     }
 
     .footer button {
-        font-size: 11px;
+        font-size: 13px;
     }
 
     h1 {
@@ -122,15 +127,15 @@ h1 {
 
 <footer class="footer">
 
-    <button disabled>© Capyl</button>
+    <button disabled>© CAPRYL</button>
 
-    <button disabled>Privacy Policy</button>
+    <button disabled>PRIVACY POLICY</button>
 
-    <button disabled>Terms &amp; Conditions</button>
+    <button disabled>TERMS &amp; CONDITIONS</button>
 
-    <button disabled>Do Not Sell My Personal Information</button>
+    <button disabled>DO NOT SELL MY PERSONAL INFORMATION</button>
 
-    <button disabled>Cookie Choices</button>
+    <button disabled>COOKIE CHOICES</button>
 
 </footer>
 
