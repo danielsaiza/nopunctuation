@@ -7,10 +7,24 @@
 <title>HOME</title>
 
 <style>
+
+/* FONTS */
+
 @font-face {
     font-family: "CityBurn";
     src: url("./cityburn.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
+
+@font-face {
+    font-family: "Duality";
+    src: url("./duality.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* GENERAL */
 
 * {
     margin: 0;
@@ -19,27 +33,106 @@
 }
 
 body {
-    background: #000;
-    color: #fad614;
+    background: #fff7ea;
+    color: #000;
     width: 100%;
     min-height: 100vh;
+    overflow: hidden;
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+    position: fixed;
+    inset: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "CityBurn", sans-serif;
 }
 
 h1 {
+    font-family: "CityBurn", sans-serif;
     font-size: 42px;
+    font-weight: normal;
     letter-spacing: 3px;
+    color: #000;
     text-transform: uppercase;
 }
+
+/* FOOTER */
+
+.footer {
+    position: fixed;
+    bottom: 25px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.footer button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #000;
+    font-family: "Duality", sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    cursor: default;
+    text-transform: none;
+    opacity: 0.85;
+}
+
+.footer button:disabled {
+    opacity: 0.85;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .footer {
+        left: 18px;
+        right: 18px;
+        bottom: 20px;
+        gap: 12px;
+    }
+
+    .footer button {
+        font-size: 11px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<h1>COMING SOON</h1>
+<!-- MAIN CONTENT -->
+
+<main class="main-content">
+    <h1>COMING SOON</h1>
+</main>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <button disabled>© Capyl</button>
+
+    <button disabled>Privacy Policy</button>
+
+    <button disabled>Terms &amp; Conditions</button>
+
+    <button disabled>Do Not Sell My Personal Information</button>
+
+    <button disabled>Cookie Choices</button>
+
+</footer>
 
 </body>
 </html>
