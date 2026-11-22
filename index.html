@@ -1,45 +1,212 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+@font-face {
+    font-family: "CityBurn";
+    src: url("cityburn.ttf") format("truetype");
+}
 
-    body {
-      background: #000000;
-      height: 100vh;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    .spinner {
-      width: 45px;
-      height: 45px;
-      border: 3px solid transparent;
-      border-top-color: #fad614;
-      border-right-color: #fad614;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
+body {
+    background: #000;
+    color: #fad614;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "CityBurn", sans-serif;
+}
 
-    @keyframes spin {
-      to {
+/* LOADING SCREEN */
+
+#loader {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.7s ease;
+    z-index: 10;
+}
+
+.spinner {
+    width: 42px;
+    height: 42px;
+    border: 3px solid transparent;
+    border-top-color: #fad614;
+    border-right-color: #fad614;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
         transform: rotate(360deg);
-      }
     }
-  </style>
+}
+
+/* PASSWORD SCREEN */
+
+#password-screen {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease;
+}
+
+#password-screen.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.title {
+    font-size: 42px;
+    letter-spacing: 3px;
+}
+
+.password-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fad614;
+    outline: none;
+    color: #fad614;
+    font-family: "CityBurn", sans-serif;
+    font-size: 20px;
+    text-align: center;
+    width: 220px;
+    padding: 12px;
+    letter-spacing: 4px;
+}
+
+.password-input::placeholder {
+    color: #fad614;
+    opacity: 0.45;
+}
+
+.enter-button {
+    background: transparent;
+    color: #fad614;
+    border: 1px solid #fad614;
+    padding: 10px 28px;
+    font-family: "CityBurn", sans-serif;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.enter-button:hover {
+    background: #fad614;
+    color: #000;
+}
+
+#error {
+    font-size: 12px;
+    display: none;
+}
+
+/* SUCCESS */
+
+#success {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+</style>
 </head>
 
 <body>
-  <div class="spinner"></div>
+
+<!-- Loading -->
+<div id="loader">
+    <div class="spinner"></div>
+</div>
+
+<!-- Password -->
+<div id="password-screen">
+    <div class="title">Password</div>
+
+    <input
+        type="password"
+        id="password"
+        class="password-input"
+        placeholder="••••"
+        autocomplete="off"
+    >
+
+    <button class="enter-button" onclick="checkPassword()">ENTER</button>
+
+    <div id="error">Incorrect password</div>
+</div>
+
+<!-- Success -->
+<div id="success">
+    ACCESS GRANTED
+</div>
+
+<script>
+
+// 4 second loading screen
+
+setTimeout(() => {
+    const loader = document.getElementById("loader");
+    const passwordScreen = document.getElementById("password-screen");
+
+    loader.style.opacity = "0";
+
+    setTimeout(() => {
+        loader.style.display = "none";
+        passwordScreen.classList.add("show");
+        document.getElementById("password").focus();
+    }, 700);
+
+}, 4000);
+
+// Password check
+
+function checkPassword() {
+    const input = document.getElementById("password").value;
+    const error = document.getElementById("error");
+
+    if (input === "DS4") {
+        document.getElementById("password-screen").style.display = "none";
+        document.getElementById("success").style.display = "flex";
+    } else {
+        error.style.display = "block";
+    }
+}
+
+// Enter key
+
+document.getElementById("password").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        checkPassword();
+    }
+});
+
+</script>
+
 </body>
 </html>
+
