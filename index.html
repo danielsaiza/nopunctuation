@@ -1,153 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> <link rel="stylesheet" href="style.css">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>password - daniel saiza</title>
+  <title>home - daniel saiza</title>
   <link rel="icon" type="image/svg+xml" href="danielsaiza.svg" />
   <style>
+    @font-face {
+      font-family: 'Duality';
+      src: url('duality.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * {
       box-sizing: border-box;
-      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 1.5rem;
-      background: #ffffff;
+      background-color: #ffffff;
       color: #111111;
-    }
-
-    .box {
-      width: 100%;
-      max-width: 360px;
-      padding: 2rem;
-      border: 1px solid #e5e5e5;
-      border-radius: 10px;
-      background: #ffffff;
-      text-align: center;
-    }
-
-    .logo {
-      display: block;
-      max-width: 120px;
-      height: auto;
-      margin: 0 auto 1.25rem;
-    }
-
-    h1 {
-      margin: 0 0 0.4rem;
-      font-size: 1.3rem;
-    }
-
-    p {
-      margin: 0 0 1.25rem;
-      font-size: 0.9rem;
-      color: #555555;
-    }
-
-    .row {
+      font-family: system-ui, -apple-system, sans-serif;
       display: flex;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
     }
 
-    input {
-      flex: 1;
-      padding: 0.65rem 0.75rem;
-      border: 1px solid #cccccc;
-      border-radius: 6px;
-      font-size: 0.95rem;
+    /* Top Left: Logo danielsaiza.svg */
+    .top-left-logo {
+      position: absolute;
+      top: 2rem;
+      left: 2.5rem;
+      width: 140px;
+      height: auto;
+      z-index: 10;
+    }
+
+    /* Top Right Navigation */
+    header {
+      position: absolute;
+      top: 2rem;
+      right: 2.5rem;
+      z-index: 10;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 1.8rem;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      font-family: 'Duality', system-ui, sans-serif;
+      font-size: 1.25rem;
+      text-transform: lowercase;
       color: #111111;
-      background: #ffffff;
-      text-align: left;
-    }
-
-    button {
-      padding: 0.65rem 0.9rem;
-      border: 1px solid #111111;
-      border-radius: 6px;
+      transition: color 0.2s ease, transform 0.15s ease;
       cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 600;
     }
 
-    .paste-btn {
-      background: #f5f5f5;
-      color: #111111;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 0.75rem;
-      background: #111111;
-      color: #ffffff;
-    }
-
-    .msg {
-      margin-top: 0.75rem;
-      min-height: 1.2rem;
-      font-size: 0.85rem;
-      color: #c62828;
-    }
-  </style>
-</head>
-<body>
-  <div class="box">
-    <img src="danielsaiza.svg" alt="Logo" class="logo" />
-    <h1>Enter Password</h1>
-    <p>Paste or type the password to continue.</p>
-
-    <form id="form">
-      <div class="row">
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          autocomplete="off"
-          required
-        />
-        <button type="button" class="paste-btn" id="paste">Paste</button>
-      </div>
-      <button type="submit" class="submit-btn">Continue</button>
-      <div class="msg" id="msg"></div>
-    </form>
-  </div>
-
-  <script>
-    const PASS = atob("ZHNob21lYWxvbmUxMg=="); // "dshomealone12"
-    const NEXT_PAGE = "home.html";
-
-    const form = document.getElementById("form");
-    const input = document.getElementById("password");
-    const pasteBtn = document.getElementById("paste");
-    const msg = document.getElementById("msg");
-
-    pasteBtn.addEventListener("click", async () => {
-      try {
-        const text = await navigator.clipboard.readText();
-        input.value = text.trim();
-        input.focus();
-        msg.textContent = "";
-      } catch {
-        msg.textContent = "Allow clipboard access or use Ctrl+V / Cmd+V.";
-      }
-    });
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (input.value === PASS) {
-        sessionStorage.setItem("unlocked", "true");
-        window.location.replace(NEXT_PAGE);
-      } else {
-        msg.textContent = "Incorrect password.";
-        input.value = "";
-        input.focus();
-      }
-    });
-  </script>
-</body>
-</html>
+    .nav-btn:hover,
