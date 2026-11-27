@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>home - daniel saiza</title>
+  <title>Daniel Saiza — Official Site</title>
   <link rel="icon" type="image/svg+xml" href="danielsaiza.svg" />
   <style>
     @font-face {
@@ -24,114 +24,109 @@
       background-color: #ffffff;
       color: #111111;
       font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
       position: relative;
     }
 
-    /* Top Navigation Container */
-    .top-bar {
-      width: 100%;
-      padding: 2rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+    /* Top Left: Logo danielsaiza.svg */
+    .top-left-logo {
       position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 20;
-    }
-
-    /* Top Left Promo (Logo + Pre-Save Button) */
-    .corner-promo {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.8rem;
-    }
-
-    .corner-logo {
-      width: 180px;
+      top: 2rem;
+      left: 2.5rem;
+      width: 140px;
       height: auto;
-      min-height: 40px;
-      display: block;
+      z-index: 10;
     }
 
-    .presave-btn {
-      display: inline-block;
-      text-decoration: none;
-      background-color: #111111;
-      color: #ffffff !important;
-      padding: 0.65rem 1.25rem;
-      border-radius: 4px;
-      font-family: system-ui, -apple-system, sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: lowercase;
-      cursor: pointer;
-      transition: background-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+    /* Top Right Navigation */
+    header {
+      position: absolute;
+      top: 2rem;
+      right: 2.5rem;
+      z-index: 10;
     }
 
-    .presave-btn:hover {
-      background-color: #222222;
-    }
-
-    .presave-btn:active {
-      background-color: #e12d3e !important;
-      color: #ffffff !important;
-      transform: scale(0.97);
-    }
-
-    /* Top Right Links (Store, Videos, Music, Tour) */
     .nav-menu {
       display: flex;
-      gap: 2rem;
-      align-items: center;
+      gap: 1.8rem;
     }
 
     .nav-btn {
       text-decoration: none;
       font-family: 'Duality', system-ui, sans-serif;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       text-transform: lowercase;
       color: #111111;
-      font-weight: 600;
       transition: color 0.2s ease, transform 0.15s ease;
       cursor: pointer;
     }
 
     .nav-btn:hover,
     .nav-btn:active {
-      color: #e12d3e !important;
+      color: #e12d3e;
       transform: translateY(-2px);
     }
 
-    /* Main Center Area (Espacio listo para contenido/fotos) */
-    .hero-area {
-      min-height: 80vh;
+    /* Main Container */
+    main {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 5rem;
+      padding-bottom: 7rem;
+    }
+
+    /* Center Main Logo (mistletoeds.png) */
+    .hero-logo {
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+      margin-bottom: 9rem;
+      display: block;
+    }
+
+    /* Bottom Items Grid */
+    .items-grid {
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 6rem 2rem 4rem;
-    }
-
-    /* Bottom Section */
-    .bottom-bar {
-      width: 100%;
-      padding: 2rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
       align-items: flex-end;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      z-index: 20;
+      gap: 4.5rem;
     }
 
-    /* Footer Left (Legal Links) */
+    .item-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .item-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .item-img {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Footer (Bottom Left) */
     footer {
-      font-family: system-ui, -apple-system, sans-serif;
-      font-size: 0.85rem;
-      line-height: 1.5;
+      position: absolute;
+      bottom: 1.5rem;
+      left: 2.5rem;
+      font-size: 0.82rem;
+      z-index: 10;
     }
 
     .footer-content {
@@ -148,7 +143,6 @@
     }
 
     .legal-link {
-      font-family: system-ui, -apple-system, sans-serif;
       color: #111111;
       text-decoration: none;
       text-transform: lowercase;
@@ -157,86 +151,192 @@
 
     .legal-link:hover,
     .legal-link:active {
-      color: #e12d3e !important;
+      color: #e12d3e;
     }
 
-    /* Bottom Right Logo (mistletoeds.png) */
-    .brand-logo-bottom {
-      width: 180px;
-      height: auto;
-      min-height: 40px;
-      display: block;
+    /* Tracklist Modal Overlay */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* Responsive mobile view */
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border: 1px solid #111111;
+      border-radius: 12px;
+      padding: 2.5rem 3rem;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+      position: relative;
+    }
+
+    .modal-title {
+      font-family: 'Duality', system-ui, sans-serif;
+      font-size: 2.2rem;
+      text-transform: lowercase;
+      margin-bottom: 1.5rem;
+      color: #111111;
+    }
+
+    .tracklist {
+      list-style: none;
+      text-align: left;
+      font-size: 0.95rem;
+      line-height: 2.1;
+      color: #222222;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #111111;
+    }
+
+    .close-btn:hover {
+      color: #e12d3e;
+    }
+
+    /* Responsive adjustments */
     @media (max-width: 768px) {
-      .top-bar {
-        flex-direction: column;
-        gap: 1.5rem;
-        padding: 1.5rem;
+      .top-left-logo {
+        top: 1.2rem;
+        left: 1.5rem;
+        width: 110px;
       }
-      .bottom-bar {
-        flex-direction: column-reverse;
-        align-items: flex-start;
-        gap: 1.5rem;
-        padding: 1.5rem;
-        position: relative;
-      }
-      .corner-logo {
-        width: 140px;
-      }
-      .brand-logo-bottom {
-        width: 130px;
+      header {
+        top: 1.2rem;
+        right: 1.5rem;
       }
       .nav-menu {
-        gap: 1.2rem;
+        gap: 1rem;
       }
       .nav-btn {
-        font-size: 1.15rem;
+        font-size: 1.05rem;
+      }
+      main {
+        padding-top: 6rem;
+      }
+      .hero-logo {
+        max-width: 260px;
+        margin-bottom: 4rem;
+      }
+      .items-grid {
+        gap: 2rem;
+      }
+      .item-img {
+        width: 85px;
+        height: 85px;
+      }
+      footer {
+        left: 1.5rem;
+        bottom: 1.2rem;
+        font-size: 0.75rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Header Area -->
-  <div class="top-bar">
-    <!-- Top Left: danielsaiza.svg + pre-save -->
-    <div class="corner-promo">
-      <img src="danielsaiza.svg" alt="Daniel Saiza" class="corner-logo" />
-      <a href="#presave" class="presave-btn">pre-save</a>
-    </div>
+  <!-- Top Left: Logo -->
+  <img src="danielsaiza.svg" alt="Daniel Saiza Logo" class="top-left-logo" />
 
-    <!-- Top Right: Menu Buttons -->
+  <!-- Top Right Navigation -->
+  <header>
     <nav class="nav-menu">
       <a href="#store" class="nav-btn">store</a>
       <a href="#videos" class="nav-btn">videos</a>
       <a href="#music" class="nav-btn">music</a>
       <a href="#tour" class="nav-btn">tour</a>
     </nav>
-  </div>
+  </header>
 
-  <!-- Center Content Placeholder -->
-  <main class="hero-area">
-    <!-- Aquí irán las imágenes o contenido central -->
+  <!-- Main Section -->
+  <main>
+    <!-- Center Logo (mistletoeds.png) -->
+    <img src="mistletoeds.png" alt="Mistletoe Daniel Saiza" class="hero-logo" />
+
+    <!-- Bottom Center Images -->
+    <div class="items-grid">
+      <a href="#letter" class="item-card">
+        <img src="danielsletter.png" alt="Daniel's Letter" class="item-img" />
+      </a>
+
+      <a href="#wishlist" class="item-card">
+        <img src="wishlist.png" alt="Wishlist" class="item-img" />
+      </a>
+
+      <button type="button" class="item-card" id="mistletoe-btn">
+        <img src="mistletoe.png" alt="Mistletoe" class="item-img" />
+      </button>
+    </div>
   </main>
 
-  <!-- Bottom Footer & Logo Area -->
-  <div class="bottom-bar">
-    <!-- Bottom Left Footer -->
-    <footer>
-      <div class="footer-content">
-        <span class="static-text">© daniel saiza</span>
-        <a href="#privacy" class="legal-link">privacy policy</a>
-        <a href="#terms" class="legal-link">terms &amp; conditions</a>
-        <a href="#donotsell" class="legal-link">do not sell my personal information</a>
-        <a href="#cookies" class="legal-link">cookie choices</a>
-      </div>
-    </footer>
+  <!-- Bottom Left Footer -->
+  <footer>
+    <div class="footer-content">
+      <span class="static-text">© daniel saiza</span>
+      <a href="#privacy" class="legal-link">privacy policy</a>
+      <a href="#terms" class="legal-link">terms &amp; conditions</a>
+      <a href="#donotsell" class="legal-link">do not sell my personal information</a>
+      <a href="#cookies" class="legal-link">cookie choices</a>
+    </div>
+  </footer>
 
-    <!-- Bottom Right: mistletoeds.png -->
-    <img src="mistletoeds.png" alt="Mistletoe DS" class="brand-logo-bottom" />
+  <!-- Tracklist Modal Window -->
+  <div class="modal-overlay" id="tracklist-modal">
+    <div class="modal-box">
+      <button type="button" class="close-btn" id="close-modal">&times;</button>
+      <h2 class="modal-title">tracklist</h2>
+      <ol class="tracklist">
+        <li>1. snowballs</li>
+        <li>2. pumpkin pie</li>
+        <li>3. cindy lou who</li>
+        <li>4. santa knows how to make me happy</li>
+        <li>5. christmas tree farm</li>
+        <li>6. under the lights</li>
+      </ol>
+    </div>
   </div>
+
+  <script>
+    const mistletoeBtn = document.getElementById("mistletoe-btn");
+    const modal = document.getElementById("tracklist-modal");
+    const closeBtn = document.getElementById("close-modal");
+
+    mistletoeBtn.addEventListener("click", () => {
+      modal.classList.add("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("active");
+      }
+    });
+  </script>
 
 </body>
 </html>
