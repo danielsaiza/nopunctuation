@@ -3,65 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>home - daniel saiza</title>
+  <title>daniel saiza</title>
   <link rel="icon" type="image/svg+xml" href="danielsaiza.svg" />
   <style>
-    @font-face {
-      font-family: 'Duality';
-      src: url('duality.otf') format('opentype');
-      font-weight: normal;
-      font-style: normal;
-    }
-
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      font-family: system-ui, -apple-system, sans-serif;
     }
 
     body {
+      margin: 0;
       min-height: 100vh;
-      background-color: #ffffff;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      background: #ffffff;
       color: #111111;
-      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .box {
+      width: 100%;
+      max-width: 360px;
+      padding: 2rem;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+      background: #ffffff;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 0.4rem;
+      font-size: 1.3rem;
+    }
+
+    p {
+      margin: 0 0 1.25rem;
+      font-size: 0.9rem;
+      color: #555555;
+    }
+
+    .row {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
-    /* Top Left: Logo danielsaiza.svg */
-    .top-left-logo {
-      position: absolute;
-      top: 2rem;
-      left: 2.5rem;
-      width: 140px;
-      height: auto;
-      z-index: 10;
-    }
-
-    /* Top Right Navigation */
-    header {
-      position: absolute;
-      top: 2rem;
-      right: 2.5rem;
-      z-index: 10;
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 1.8rem;
-    }
-
-    .nav-btn {
-      text-decoration: none;
-      font-family: 'Duality', system-ui, sans-serif;
-      font-size: 1.25rem;
-      text-transform: lowercase;
+    input {
+      flex: 1;
+      padding: 0.65rem 0.75rem;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      font-size: 0.95rem;
       color: #111111;
-      transition: color 0.2s ease, transform 0.15s ease;
+      background: #ffffff;
+      text-align: left;
+    }
+
+    button {
+      padding: 0.65rem 0.9rem;
+      border: 1px solid #111111;
+      border-radius: 6px;
       cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
     }
 
-    .nav-btn:hover,
+    .paste-btn {
+      background: #f5f5f5;
+      color: #111111;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 0.75rem;
+      background: #111111;
+      color: #ffffff;
+    }
+
+    .msg {
+      margin-top: 0.75rem;
+      min-height: 1.2rem;
+      font-size: 0.85rem;
+      color: #c62828;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Enter Password</h1>
+    <p>Paste or type the password to continue.</p>
+
+    <form id="form">
+      <div class="row">
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          autocomplete="off"
+          required
+        />
+        <button type="button" class="paste-btn" id="paste">Paste</button>
+      </div>
+      <button type="submit" class="submit-btn">Continue</button>
+      <div class="msg" id="msg"></div>
+    </form>
+  </div>
+
+  <script>
+    const PASS = atob("ZHNob21lYWxvbmUxMg=="); // "dshomealone12"
+    const NEXT_PAGE = "home.html";
+
+    const form = document.getElementById("form");
+    const input = document.getElementById("password");
+    const pasteBtn = document.getElementById("paste");
+    const msg = document.getElementById("msg");
+
+    pasteBtn.addEventListener("click", async () => {
+      try {
+        const text = await navigator.clipboard.readText();
+        input.value = text.trim();
+        input.focus();
+        msg.textContent = "";
+      } catch {
+        msg.textContent = "Allow clipboard access or use Ctrl+V / Cmd+V.";
+      }
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (input.value === PASS) {
+        sessionStorage.setItem("unlocked", "true");
+        window.location.replace(NEXT_PAGE);
+      } else {
+        msg.textContent = "Incorrect password.";
+        input.value = "";
+        input.focus();
+      }
+    });
+  </script>
+</body>
+</html>
