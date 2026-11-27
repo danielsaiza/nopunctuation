@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> <link rel="stylesheet" href="style.css">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>home - daniel saiza</title>
   <link rel="icon" type="image/svg+xml" href="danielsaiza.svg" />
   <style>
-    /* Carga de la fuente custom duality.otf */
     @font-face {
       font-family: 'Duality';
       src: url('duality.otf') format('opentype');
@@ -31,7 +30,47 @@
       font-family: system-ui, -apple-system, sans-serif;
     }
 
-    /* Header & Right Navigation */
+    /* Top Left Logo + Pre-Save Button */
+    .corner-promo {
+      position: fixed;
+      top: 1.5rem;
+      left: 2.5rem;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+
+    .corner-logo {
+      max-width: 145px;
+      height: auto;
+      display: block;
+    }
+
+    .presave-btn {
+      display: inline-block;
+      text-decoration: none;
+      background-color: #111111;
+      color: #ffffff;
+      padding: 0.55rem 1.15rem;
+      border-radius: 4px;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+      transition: background-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+      cursor: pointer;
+    }
+
+    .presave-btn:active {
+      background-color: #e12d3e;
+      color: #ffffff;
+      transform: scale(0.98);
+    }
+
+    /* Top Right Navigation */
     header {
       width: 100%;
       padding: 1.5rem 2.5rem;
@@ -41,7 +80,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 20;
+      z-index: 15;
     }
 
     .nav-menu {
@@ -54,7 +93,7 @@
       text-decoration: none;
       font-family: 'Duality', system-ui, sans-serif;
       font-size: 1.25rem;
-      text-transform: lowercase; /* Forzar minúsculas */
+      text-transform: lowercase;
       color: #111111;
       transition: color 0.2s ease, transform 0.15s ease;
       cursor: pointer;
@@ -66,22 +105,23 @@
       transform: translateY(-2px);
     }
 
-    /* Bottom Right Logo (Más grande) */
+    /* Bottom Right Logo */
     .brand-logo {
       position: fixed;
       bottom: 2rem;
       right: 2.5rem;
-      max-width: 220px; /* Tamaño más grande */
+      max-width: 220px;
       height: auto;
       z-index: 10;
     }
 
-    /* Footer Bottom Left / Center */
+    /* Footer Bottom Left (Normal Font) */
     footer {
       position: fixed;
       bottom: 1.5rem;
       left: 2.5rem;
       z-index: 10;
+      font-family: system-ui, -apple-system, sans-serif;
       font-size: 0.85rem;
       line-height: 1.4;
     }
@@ -95,14 +135,15 @@
 
     .static-text {
       color: #111111;
-      font-weight: bold;
+      font-weight: 600;
+      text-transform: lowercase;
     }
 
     .legal-link {
-      font-family: 'Duality', system-ui, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
       color: #111111;
       text-decoration: none;
-      text-transform: lowercase; /* Forzar minúsculas */
+      text-transform: lowercase;
       transition: color 0.2s ease;
     }
 
@@ -111,17 +152,27 @@
       color: #e12d3e;
     }
 
-    /* Adaptación para pantallas pequeñas */
+    /* Responsive adjustments */
     @media (max-width: 768px) {
+      .corner-promo {
+        top: 1.2rem;
+        left: 1.5rem;
+      }
+      .corner-logo {
+        max-width: 110px;
+      }
       header {
         padding: 1.2rem 1.5rem;
-        justify-content: center;
+        justify-content: flex-end;
       }
       .nav-menu {
-        gap: 1.2rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        max-width: 210px;
       }
       .nav-btn {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
       }
       .brand-logo {
         bottom: 5rem;
@@ -130,6 +181,7 @@
       }
       footer {
         left: 1.5rem;
+        right: 1.5rem;
         bottom: 1.2rem;
         font-size: 0.75rem;
       }
@@ -137,6 +189,12 @@
   </style>
 </head>
 <body>
+
+  <!-- Top Left Logo + Pre-Save Button -->
+  <div class="corner-promo">
+    <img src="mistletoeds.png" alt="Mistletoe DS" class="corner-logo" />
+    <a href="#presave" class="presave-btn">pre-save</a>
+  </div>
 
   <!-- Top Right Navigation -->
   <header>
@@ -156,7 +214,7 @@
     <div class="footer-content">
       <span class="static-text">© daniel saiza</span>
       <a href="#privacy" class="legal-link">privacy policy</a>
-      <a href="#terms" class="legal-link">terms & conditions</a>
+      <a href="#terms" class="legal-link">terms &amp; conditions</a>
       <a href="#donotsell" class="legal-link">do not sell my personal information</a>
       <a href="#cookies" class="legal-link">cookie choices</a>
     </div>
