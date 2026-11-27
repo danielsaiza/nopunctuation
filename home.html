@@ -6,11 +6,18 @@
   <title>home - daniel saiza</title>
   <link rel="icon" type="image/svg+xml" href="danielsaiza.svg" />
   <style>
+    /* Carga de la fuente custom duality.otf */
+    @font-face {
+      font-family: 'Duality';
+      src: url('duality.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, sans-serif;
     }
 
     body {
@@ -21,80 +28,81 @@
       flex-direction: column;
       justify-content: space-between;
       position: relative;
+      font-family: system-ui, -apple-system, sans-serif;
     }
 
-    /* Main Container with Nav Left */
-    .main-content {
-      padding: 3rem 2rem;
+    /* Header & Right Navigation */
+    header {
+      width: 100%;
+      padding: 1.5rem 2.5rem;
       display: flex;
+      justify-content: flex-end;
       align-items: center;
-      min-height: 80vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 20;
     }
 
     .nav-menu {
       display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
+      gap: 2rem;
+      align-items: center;
     }
 
     .nav-btn {
-      display: inline-block;
       text-decoration: none;
-      font-size: 2rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-family: 'Duality', system-ui, sans-serif;
+      font-size: 1.25rem;
+      text-transform: lowercase; /* Forzar minúsculas */
       color: #111111;
       transition: color 0.2s ease, transform 0.15s ease;
-      width: fit-content;
       cursor: pointer;
     }
 
     .nav-btn:hover,
     .nav-btn:active {
       color: #e12d3e;
-      transform: translateX(4px);
+      transform: translateY(-2px);
     }
 
-    /* Logo Bottom Right */
+    /* Bottom Right Logo (Más grande) */
     .brand-logo {
       position: fixed;
       bottom: 2rem;
-      right: 2rem;
-      max-width: 130px;
+      right: 2.5rem;
+      max-width: 220px; /* Tamaño más grande */
       height: auto;
       z-index: 10;
     }
 
-    /* Footer Bottom Center */
+    /* Footer Bottom Left / Center */
     footer {
-      width: 100%;
-      padding: 1.5rem 1rem;
-      text-align: center;
-      font-size: 0.78rem;
-      color: #111111;
-      line-height: 1.6;
+      position: fixed;
+      bottom: 1.5rem;
+      left: 2.5rem;
+      z-index: 10;
+      font-size: 0.85rem;
+      line-height: 1.4;
     }
 
     .footer-content {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       align-items: center;
-      gap: 0.4rem 0.6rem;
-      max-width: 900px;
-      margin: 0 auto;
+      gap: 0.8rem;
     }
 
     .static-text {
       color: #111111;
-      font-weight: 600;
+      font-weight: bold;
     }
 
     .legal-link {
+      font-family: 'Duality', system-ui, sans-serif;
       color: #111111;
       text-decoration: none;
-      text-transform: capitalize;
+      text-transform: lowercase; /* Forzar minúsculas */
       transition: color 0.2s ease;
     }
 
@@ -103,41 +111,47 @@
       color: #e12d3e;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 600px) {
-      .main-content {
-        padding: 2rem 1.5rem;
+    /* Adaptación para pantallas pequeñas */
+    @media (max-width: 768px) {
+      header {
+        padding: 1.2rem 1.5rem;
+        justify-content: center;
+      }
+      .nav-menu {
+        gap: 1.2rem;
       }
       .nav-btn {
-        font-size: 1.6rem;
+        font-size: 1.1rem;
       }
       .brand-logo {
-        bottom: 4.5rem;
+        bottom: 5rem;
         right: 1.5rem;
-        max-width: 90px;
+        max-width: 140px;
       }
       footer {
-        padding-bottom: 1.5rem;
+        left: 1.5rem;
+        bottom: 1.2rem;
+        font-size: 0.75rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Left Navigation -->
-  <main class="main-content">
+  <!-- Top Right Navigation -->
+  <header>
     <nav class="nav-menu">
-      <a href="#store" class="nav-btn">Store</a>
-      <a href="#videos" class="nav-btn">Videos</a>
-      <a href="#music" class="nav-btn">Music</a>
-      <a href="#tour" class="nav-btn">Tour</a>
+      <a href="#store" class="nav-btn">store</a>
+      <a href="#videos" class="nav-btn">videos</a>
+      <a href="#music" class="nav-btn">music</a>
+      <a href="#tour" class="nav-btn">tour</a>
     </nav>
-  </main>
+  </header>
 
   <!-- Bottom Right Logo -->
   <img src="danielsaiza.svg" alt="Daniel Saiza Logo" class="brand-logo" />
 
-  <!-- Bottom Center Footer -->
+  <!-- Bottom Left Footer -->
   <footer>
     <div class="footer-content">
       <span class="static-text">© daniel saiza</span>
